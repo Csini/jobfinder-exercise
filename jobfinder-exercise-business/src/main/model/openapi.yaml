@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  description:
+    Jobfinder Exercise Application
+  version: 1.0.0
+  title: jobfinder-exercise API
+  contact:
+    name: Exercise
+
+servers:
+  - url: http://localhost:9010/
+
+paths:
+  /client:
+    get:
+      tags: 
+        - client
+      summary: generates new apikey
+      operationId: getClient
+      parameters:
+        - in: query
+          name: name
+          description: name von client
+          required: true
+          schema:
+             type: string
+        - in: query
+          name: email
+          description: unique email von client
+          required: true
+          schema:
+             type: string
+      responses:
+        200:
+          description: Returns the apikey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clientResponse'
+        400:
+          $ref: '#/components/responses/BadRequestError'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+components:
+  securitySchemes:
+     ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  responses:
+    BadRequestError:
+      description: Syntax error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            message: Request cannot be processed because it is syntactically wrong
+            timestamp: '2023-04-20T11:00:00Z'
+    UnauthorizedError:
+      description: Authentication error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            message: Authentication error
+            timestamp: '2023-04-20T11:00:00Z'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            message: Internal server error
+            timestamp: '2023-04-20T11:00:00Z'
+  schemas:
+    clientResponse:
+      type: object
+      required:
+        - apikey
+        - email
+      properties:
+        apikey:
+          type: string
+          format: uuid
+        email:
+          type: string
+    Error:
+      type: object
+      description: Error object
+      required:
+        - message
+        - timestamp
+      properties:
+        message:
+          type: string
+          description: Error message
+        timestamp:
+          type: string
+          format: date-time
+          description: The timestamp the error has occured
