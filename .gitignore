@@ -32,5 +32,5 @@ replay_pid*
 /node_modules/
 /.angular/
 
-./jobfinder-exercise-ui/.angular
-./jobfinder-exercise-ui/node_modules
+jobfinder-exercise-ui/.angular/
+jobfinder-exercise-ui/node_modules
