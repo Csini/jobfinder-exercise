@@ -6,10 +6,12 @@
 *production-ready:*
 - nem GDPR berát, h email címet ésmevet tárolunk örökké, pláne, h olvasható is
 - semmi nem véd a floodolástól
-- -Dspring.jpa.defer-datasource-initialization=false -al kell indtíani, h ne írjon bele az adatbázisba
-- -Dlogging.level.root=INFO
-- -Dspring.datasource.url=jdbc:h2:xxxx ---> itt kell megadni a tényleges PROD adatbázis elérhetőségét, ha az H2, ha nem akkor további paraméterek megadására van szükség
-- -Dspring.datasource.username=xx és -Dspring.datasource.password=xxx az db usernév és passwordjei
+- így kell indítani mvn spring-boot:run -Dspring-boot.run.arguments=
+- --spring.jpa.defer-datasource-initialization=false, -al kell indtíani, h ne írjon bele az adatbázisba default adatokat
+- --logging.level.root=INFO,
+- --spring.datasource.url=jdbc:h2:xxxx, ---> itt kell megadni a tényleges PROD adatbázis elérhetőségét, ha az H2 (ha nem akkor további paraméterek megadására van szükség)
+- --spring.datasource.username=xx, és --spring.datasource.password=xxx, az db usernév és passwordjei
+- portot a --server.port=9010, -al lehet megadni, ha nincs megadva, akkor a 9010-es porton fut
   
 
 
