@@ -28,11 +28,14 @@ public class SecurityConfig {
 //	
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf()
+    	http
+    	.headers().frameOptions().sameOrigin()
+    	.and()
+        .csrf()
           .disable()
           .authorizeRequests()
           .antMatchers(HttpMethod.OPTIONS,"/position/**").permitAll()//allow CORS option calls
-          .antMatchers("/", "/swagger-ui/**", "**/api-docs/**", "/actuator/**", "/database", "/h2-console/*", "/v3/api-docs/swagger-config", "/v3/api-docs", "/client").permitAll()
+          .antMatchers("/", "/swagger-ui/**", "**/api-docs/**", "/actuator/**", "/database", "/h2-console/**", "/v3/api-docs/swagger-config", "/v3/api-docs", "/client").permitAll()
           .anyRequest().authenticated()
 //          .antMatchers("/**")
 //          .authenticated()

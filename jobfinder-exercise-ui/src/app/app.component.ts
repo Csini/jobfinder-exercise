@@ -22,6 +22,10 @@ export class AppComponent {
 	bad_email$ = this.clientService.createClient("testname", "aaa");
 	
 	position1: any;
+	
+	soft: any;
+	
+	budapest : any;
 
 	// Inject the generated Angular service as a dependency of this class
 	constructor(private clientService: ClientService, private positionService: PositionService, private authService: AuthService) { }
@@ -36,6 +40,16 @@ export class AppComponent {
 			this.positionService.getPosition(1).subscribe((ret: any) => {
 				console.log("ret:" + ret);
 				this.position1 = ret;
+			})
+			
+			this.positionService.searchPosition('soft', undefined).subscribe((ret: any) => {
+				console.log("ret:" + ret);
+				this.soft = ret;
+			})
+			
+			this.positionService.searchPosition(undefined, 'Budapest').subscribe((ret: any) => {
+				console.log("ret:" + ret);
+				this.budapest = ret;
 			})
 		})
 		

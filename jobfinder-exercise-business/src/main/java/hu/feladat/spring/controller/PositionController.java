@@ -1,5 +1,12 @@
 package hu.feladat.spring.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,9 +30,10 @@ public class PositionController implements PositionApi {
 
 	@Override
 	public ResponseEntity<String> savePosition(String title, String place) {
-		return ResponseEntity.ok().body(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()
-				+ "/position/" + service.savePosition(title, place).getId());
+		Position position = service.savePosition(title, place);
+		return ResponseEntity.ok().body(getURL(position));
 	}
+
 
 	@Override
 	public ResponseEntity<hu.spring.feladat.openapi.model.Position> getPosition(Integer id) {
@@ -36,6 +44,17 @@ public class PositionController implements PositionApi {
 		position.setPlace(dbPosition.getPlace());
 		return ResponseEntity.ok().body(position);
 
+	}
+
+	@Override
+	public ResponseEntity<List<String>> searchPosition(String location, String keywword) {
+		return ResponseEntity.ok().body(service.searchPosition(location, keywword).stream().map(position -> getURL(position)).collect(Collectors.toList()));
+	}
+	
+	
+	private String getURL(Position position) {
+		return ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()
+				+ "/position/" + position.getId();
 	}
 
 }

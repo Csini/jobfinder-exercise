@@ -107,6 +107,46 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         500:
           $ref: '#/components/responses/InternalServerError'
+  /position/search:
+    post:
+      tags: 
+        - position
+      summary: searches positions
+      operationId: searchPosition
+      parameters:
+        - in: query
+          name: keywword
+          description: keyword von position (max 50 char)
+          required: false
+          schema:
+             type: string
+             maxLength: 50
+        - in: query
+          name: location
+          description: location von position
+          required: false
+          schema:
+             type: string
+             maxLength: 50
+      security:
+        - ApiKeyAuth: []
+      responses:
+        200:
+          description: Returns the URL from positions in an array
+          content:
+             text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+        400:
+          $ref: '#/components/responses/BadRequestError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+
+
 components:
   securitySchemes:
     ApiKeyAuth:
