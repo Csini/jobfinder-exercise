@@ -11,5 +11,6 @@ index.ts
 model/clientResponse.ts
 model/modelError.ts
 model/models.ts
+model/position.ts
 param.ts
 variables.ts

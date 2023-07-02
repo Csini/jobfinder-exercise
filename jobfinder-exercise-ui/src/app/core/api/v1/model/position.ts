@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ItemOutput } from './itemOutput';
 
 
-export interface ItemsResponse { 
-    size?: number;
-    items?: Array<ItemOutput>;
+export interface Position { 
+    id: number;
+    title?: string;
+    place?: string;
 }
 

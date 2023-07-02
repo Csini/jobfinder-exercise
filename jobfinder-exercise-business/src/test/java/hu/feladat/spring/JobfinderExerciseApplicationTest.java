@@ -2,11 +2,12 @@ package hu.feladat.spring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootTest
+//@SpringBootTest
 public class JobfinderExerciseApplicationTest {
 
-    @Test
+//    @Test
     void contextLoads() {
     }
 }

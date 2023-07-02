@@ -28,6 +28,11 @@ public class AuthenticationFilter extends /* GenericFilterBean */OncePerRequestF
 
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+		
+		if("OPTIONS".equals(request.getMethod())) {
+			return true;
+		}
+		
 		String path = request.getRequestURI();
 		System.out.println("!!!!!!!!!!!!!!!!!:"+path);
 		
@@ -35,10 +40,6 @@ public class AuthenticationFilter extends /* GenericFilterBean */OncePerRequestF
 		System.out.println(ret);
 		return ret;
 	}
-
-//	@Override
-//    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
-//      throws IOException, ServletException {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

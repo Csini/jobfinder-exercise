@@ -38,9 +38,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/clientResponse'
+                $ref: '#/components/schemas/ClientResponse'
         400:
           $ref: '#/components/responses/BadRequestError'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+  /position/{id}:
+    get:
+      tags: 
+        - position
+      summary: reads position with id
+      operationId: getPosition
+      parameters:
+        - in: path
+          name: id
+          description: id von position
+          required: true
+          schema:
+             type: integer
+      security:
+        - ApiKeyAuth: []
+      responses:
+        200:
+          description: Returns the position
+          content:
+             application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+        400:
+          $ref: '#/components/responses/BadRequestError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         500:
           $ref: '#/components/responses/InternalServerError'
   /position:
@@ -70,9 +98,9 @@ paths:
         200:
           description: Returns the URL from position
           content:
-            application/json:
+             text/plain:
               schema:
-                type: String
+                type: string
         400:
           $ref: '#/components/responses/BadRequestError'
         401:
@@ -114,7 +142,7 @@ components:
             message: Internal server error
             timestamp: '2023-04-20T11:00:00Z'
   schemas:
-    clientResponse:
+    ClientResponse:
       type: object
       required:
         - apikey
@@ -124,6 +152,17 @@ components:
           type: string
           format: uuid
         email:
+          type: string
+    Position:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        place:
           type: string
     Error:
       type: object

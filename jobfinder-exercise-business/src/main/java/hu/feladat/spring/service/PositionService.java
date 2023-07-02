@@ -6,4 +6,6 @@ public interface PositionService {
 
 	public Position savePosition(String title, String place);
 
+	public Position getPosiion(Integer id);
+
 }

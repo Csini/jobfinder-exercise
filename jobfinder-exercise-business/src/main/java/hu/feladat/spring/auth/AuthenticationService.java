@@ -1,5 +1,7 @@
 package hu.feladat.spring.auth;
 
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ public class AuthenticationService {
 
 	public Authentication getAuthentication(HttpServletRequest request) {
 		String apiKey = request.getHeader(AUTH_TOKEN_HEADER_NAME);
-		if (apiKey == null || repository.findById(apiKey).isEmpty()) {
+		if (apiKey == null || repository.findByApikey(UUID.fromString(apiKey)).isEmpty()) {
 			throw new BadCredentialsException("Invalid API Key:" + apiKey);
 		}
 
