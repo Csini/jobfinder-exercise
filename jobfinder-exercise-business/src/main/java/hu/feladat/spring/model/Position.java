@@ -9,9 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.Type;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,17 +21,22 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table
-public class Client implements Serializable {
+public class Position implements Serializable {
 
 	@Id
-	@Email
-	@Column(name="email")
-	private String email;
+	@GeneratedValue
+	private int id;
 
-	@Column(name="name", length = 100)
-	private String name;
+	@Column(name="title", length = 50)
+	private String title;
 	
-	@Column(name = "apikey", length = 36)
-	@Type(type="uuid-char")
-	private UUID apikey;
+	@Column(name="place", length = 50)
+	private String place;
+	
+	public Position(String title, String place) {
+		super();
+		this.title = title;
+		this.place = place;
+	}
+	
 }

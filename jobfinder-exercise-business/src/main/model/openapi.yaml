@@ -12,15 +12,15 @@ servers:
 
 paths:
   /client:
-    get:
+    post:
       tags: 
         - client
       summary: generates new apikey
-      operationId: getClient
+      operationId: createClient
       parameters:
         - in: query
           name: name
-          description: name von client
+          description: name von client (max 100 char)
           required: true
           schema:
              type: string
@@ -43,9 +43,45 @@ paths:
           $ref: '#/components/responses/BadRequestError'
         500:
           $ref: '#/components/responses/InternalServerError'
+  /position:
+    post:
+      tags: 
+        - position
+      summary: saves new position
+      operationId: savePosition
+      parameters:
+        - in: query
+          name: title
+          description: title von position (max 50 char)
+          required: true
+          schema:
+             type: string
+             maxLength: 50
+        - in: query
+          name: place
+          description: palce von position
+          required: true
+          schema:
+             type: string
+             maxLength: 50
+      security:
+        - ApiKeyAuth: []
+      responses:
+        200:
+          description: Returns the URL from position
+          content:
+            application/json:
+              schema:
+                type: String
+        400:
+          $ref: '#/components/responses/BadRequestError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        500:
+          $ref: '#/components/responses/InternalServerError'
 components:
   securitySchemes:
-     ApiKeyAuth:
+    ApiKeyAuth:
       type: apiKey
       in: header
       name: X-API-Key

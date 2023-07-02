@@ -23,7 +23,7 @@ public class ClientController implements ClientApi {
 	}
 
 	@Override
-	public ResponseEntity<ClientResponse> getClient(String name, String email) {
+	public ResponseEntity<ClientResponse> createClient(String name, String email) {
 
 		UUID apiKey = service.getClient(name, email);
 		ClientResponse clientResponse = new ClientResponse(apiKey, email);

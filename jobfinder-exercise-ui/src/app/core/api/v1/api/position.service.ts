@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { ClientResponse } from '../model/clientResponse';
+import { ModelString } from '../model/modelString';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -30,7 +30,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class ClientService {
+export class PositionService {
 
     protected basePath = 'http://localhost:9010';
     public defaultHeaders = new HttpHeaders();
@@ -92,31 +92,31 @@ export class ClientService {
     }
 
     /**
-     * generates new apikey
-     * @param name name von client (max 100 char)
-     * @param email unique email von client
+     * saves new position
+     * @param title title von position (max 50 char)
+     * @param place palce von position
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createClient(name: string, email: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<ClientResponse>;
-    public createClient(name: string, email: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<ClientResponse>>;
-    public createClient(name: string, email: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<ClientResponse>>;
-    public createClient(name: string, email: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (name === null || name === undefined) {
-            throw new Error('Required parameter name was null or undefined when calling createClient.');
+    public savePosition(title: string, place: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<ModelString>;
+    public savePosition(title: string, place: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<ModelString>>;
+    public savePosition(title: string, place: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<ModelString>>;
+    public savePosition(title: string, place: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (title === null || title === undefined) {
+            throw new Error('Required parameter title was null or undefined when calling savePosition.');
         }
-        if (email === null || email === undefined) {
-            throw new Error('Required parameter email was null or undefined when calling createClient.');
+        if (place === null || place === undefined) {
+            throw new Error('Required parameter place was null or undefined when calling savePosition.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (name !== undefined && name !== null) {
+        if (title !== undefined && title !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>name, 'name');
+            <any>title, 'title');
         }
-        if (email !== undefined && email !== null) {
+        if (place !== undefined && place !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>email, 'email');
+            <any>place, 'place');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -150,8 +150,8 @@ export class ClientService {
             }
         }
 
-        let localVarPath = `/client`;
-        return this.httpClient.request<ClientResponse>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/position`;
+        return this.httpClient.request<ModelString>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

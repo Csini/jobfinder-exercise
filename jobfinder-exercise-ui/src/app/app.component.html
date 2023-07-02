@@ -8,8 +8,41 @@
 	</div>
 
 	<h2>uuid: {{c$ | async | json}}</h2>
-	
+
 	<h2>bad_email: {{bad_email$ | async | json}}</h2>
+
+
+
+	<div class="container">
+		<h1 class="display-4 text-center header mb-5">Position</h1>
+		<form (ngSubmit)="onCreatePosition()">
+			<div class="row">
+				<div class="col-4">
+					<div class="form-group">
+						<label for="inputTitle" class="sr-only">Title</label> <input
+							type="text" class="form-control form-control-lg" id="inputTitle"
+							placeholder="Title...">
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="form-group">
+						<label for="inputPlace" class="sr-only">Place</label> <input
+							type="text" class="form-control form-control-lg" id="inputPlace"
+							placeholder="Place...">
+					</div>
+				</div>
+				<div class="col-4">
+					<button
+					type="submit"
+						class="btn btn-primary btn-block btn-lg"
+						>Create Position</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+
 
 
 </div>
