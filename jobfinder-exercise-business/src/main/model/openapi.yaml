@@ -24,12 +24,14 @@ paths:
           required: true
           schema:
              type: string
+             maxLength: 100
         - in: query
           name: email
           description: unique email von client
           required: true
           schema:
              type: string
+             pattern: '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'
       responses:
         200:
           description: Returns the apikey

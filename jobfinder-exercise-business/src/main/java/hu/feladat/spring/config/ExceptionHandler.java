@@ -3,6 +3,8 @@ package hu.feladat.spring.config;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
+import javax.validation.ConstraintViolationException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -36,6 +38,13 @@ public class ExceptionHandler extends ResponseStatusExceptionHandler {
     	Error exceptionResponse = new Error(ISSUE_DURING_PROCESSING_REQUEST_PLEASE_CONTACT_APPLICATION_TEAM, OffsetDateTime.now());
         logError(ex,HttpStatus.INTERNAL_SERVER_ERROR);
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    
+    @org.springframework.web.bind.annotation.ExceptionHandler(ConstraintViolationException.class)
+    public static final ResponseEntity<Error> exceptionHandler(ConstraintViolationException ex) {
+    	Error exceptionResponse = new Error(ex.getMessage(), OffsetDateTime.now());
+        logError(ex,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
