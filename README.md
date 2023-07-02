@@ -4,6 +4,13 @@
 
 
 *production-ready:*
+- nem GDPR berát, h email címet ésmevet tárolunk örökké, pláne, h olvasható is
+- semmi nem véd a floodolástól
+- -Dspring.jpa.defer-datasource-initialization=false -al kell indtíani, h ne írjon bele az adatbázisba
+- -Dlogging.level.root=INFO
+- -Dspring.datasource.url=jdbc:h2:xxxx ---> itt kell megadni a tényleges PROD adatbázis elérhetőségét, ha az H2, ha nem akkor további paraméterek megadására van szükség
+- -Dspring.datasource.username=xx és -Dspring.datasource.password=xxx az db usernév és passwordjei
+  
 
 
 *továbbfejlesztési lehetőségek/javaslatok:*
