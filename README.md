@@ -1,7 +1,11 @@
 # jobfinder-exercise
 
 *howto run:*
-
+- a http://localhost:9010/ -re felnyílik a swagger-ui
+- a http://localhost:9010/database-re felnyílik a h2 console (sa/password) a default belépés
+- spring-boot 2.7-es applikáció. standard módon lehet indítani maven-nel: mvn spring-boot:run  vagy sima java-val (main class a JobfinderExerciseApplication)
+- a jobfinder-exercise-business mellett készült egy nagyon minimal jobfinder-exercise-ui is, ami egy Angular-15 mini-spa. ng serve -l indul, a standard http://localhost:4200/ -on fut, a CORS fixen erre nyitva van (be van égetve a RestController-be)
+- az authentikálás a X-API-KEY header-rel történik
 
 *production-ready:*
 - nem GDPR berát, h email címet ésmevet tárolunk örökké, pláne, h olvasható is
